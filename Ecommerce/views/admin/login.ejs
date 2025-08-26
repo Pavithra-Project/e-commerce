@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="/css/adminlogin.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <video autoplay muted loop class="bg-video">
+    <source src="https://videos.pexels.com/video-files/5658299/5658299-uhd_2732_1440_25fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="admin-login-container">
+    <h2>Admin Login</h2>
+    <form action="/admin/login" method="POST">
+      <label for="username">Username</label>
+      <input type="text" name="username" placeholder="Enter email" required />
+
+      <label for="password">Password</label>
+      <input type="password" name="password" placeholder="Enter password" required />
+
+      <button type="submit">Login</button>
+    </form>
+    <a href="/login" class="user-login-link">Go to User Login</a>
+  </div>
+</body>
+</html>

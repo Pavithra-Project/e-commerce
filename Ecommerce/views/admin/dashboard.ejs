@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      /* Gradient background */
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #fad0c4 51%, #fbc2eb 100%);
+      min-height: 100vh;
+      color: #222;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      backdrop-filter: blur(10px);
+    }
+    nav {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border-radius: 12px;
+      color: #4a148c;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 1rem;
+      margin: 0 2rem 2rem 2rem;
+      z-index: 1000;
+      font-weight: 700;
+      letter-spacing: 1.1px;
+    }
+    nav .brand {
+      font-size: 1.8rem;
+      color: #6a1b9a;
+      text-shadow: 0 0 6px #ab47bcaa;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul li {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      color: #6a1b9a;
+      font-weight: 600;
+      user-select: none;
+    }
+    nav ul li:hover,
+    nav ul li.active {
+      background: rgba(106, 27, 154, 0.3);
+      color: #fce4ec;
+      box-shadow: 0 4px 15px rgba(106, 27, 154, 0.4);
+    }
+    nav ul li a {
+      color: inherit;
+      text-decoration: none;
+    }
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto 3rem auto;
+      padding: 0 1rem;
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      color: #7b1fa2;
+      text-shadow: 0 0 6px #ce93d8;
+      font-weight: 700;
+      font-size: 2rem;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px 0 rgba(149, 117, 205, 0.25);
+      overflow: hidden;
+      color: #4a148c;
+      font-weight: 600;
+      backdrop-filter: blur(15px);
+    }
+    th, td {
+      padding: 15px 20px;
+      text-align: left;
+      vertical-align: middle;
+      border: none;
+    }
+    th {
+      background: rgba(106, 27, 154, 0.5);
+      color: #f3e5f5;
+      font-weight: 700;
+      text-shadow: 0 0 4px #b39ddb;
+    }
+    tbody tr {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 12px rgba(106, 27, 154, 0.1);
+    }
+    tbody tr:hover {
+      background: rgba(106, 27, 154, 0.3);
+      color: #f3e5f5;
+      box-shadow: 0 6px 20px rgba(106, 27, 154, 0.3);
+    }
+    section {
+      display: none;
+      margin-top: 1rem;
+      padding: 2rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(149, 117, 205, 0.25);
+      backdrop-filter: blur(15px);
+      color: #4a148c;
+    }
+    section.active {
+      display: block;
+    }
+    form label {
+      color: #6a1b9a;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      text-shadow: 0 0 4px #ce93d8;
+    }
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 14px;
+      margin-bottom: 1.5rem;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.3);
+      color: #4a148c;
+      font-size: 1rem;
+      box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+      background: rgba(255, 255, 255, 0.5);
+      color: #6a1b9a;
+      outline: none;
+      box-shadow: 0 0 10px #b39ddb;
+    }
+    button[type="submit"] {
+      display: block;
+      padding: 12px 30px;
+      margin: 0 auto;
+      background: linear-gradient(45deg, #7b1fa2, #ab47bc);
+      color: #f3e5f5;
+      font-weight: 800;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(171, 71, 188, 0.7);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    button[type="submit"]:hover {
+      box-shadow: 0 12px 36px rgba(171, 71, 188, 0.9);
+      transform: translateY(-2px);
+    }
+    img {
+      border-radius: 10px;
+      box-shadow: 0 0 12px #ab47bcaa;
+      max-width: 70px;
+      height: auto;
+      display: block;
+    }
+    p {
+      color: #4a148caa;
+      font-style: italic;
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">Admin Dashboard</div>
+    <ul>
+      <li id="nav-users" class="active">View Users</li>
+      <li id="nav-orders">View Orders</li>
+      <li id="nav-add">Add Product</li>
+      <li><a href="/admin/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <!-- Users Section -->
+    <section id="section-users" class="active">
+      <h1>Registered Users</h1>
+      <% if (users && users.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach((user, index) => { %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= user.username %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <p>No registered users found.</p>
+      <% } %>
+    </section>
+
+    <!-- Orders Section -->
+    <section id="section-orders">
+      <h1>Orders</h1>
+      <% if (orders && orders.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+              <th>Image</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach((order, index) => { %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= order.user ? order.user.username : 'N/A' %></td>
+                <td><%= order.productId ? order.productId.name : 'N/A' %></td>
+                <td><%= order.productId ? order.productId.category : 'N/A' %></td>
+                <td><%= order.quantity %></td>
+                <td>$<%= order.total.toFixed(2) %></td>
+                <td>
+                  <% if (order.productId && order.productId.image) { %>
+                    <img src="<%= order.productId.image %>" alt="<%= order.productId.name %>" />
+                  <% } else { %>
+                    N/A
+                  <% } %>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <p>No orders found.</p>
+      <% } %>
+    </section>
+
+    <!-- Add Product Section -->
+    <section id="section-add">
+      <h1>Add New Product</h1>
+      <form action="/admin/add-product" method="POST">
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" name="name" required />
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required />
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required />
+        <label for="image">Image URL:</label>
+        <input type="text" id="image" name="image" required />
+        <button type="submit">Add Product</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    const navUsers = document.getElementById('nav-users');
+    const navOrders = document.getElementById('nav-orders');
+    const navAdd = document.getElementById('nav-add');
+
+    const sectionUsers = document.getElementById('section-users');
+    const sectionOrders = document.getElementById('section-orders');
+    const sectionAdd = document.getElementById('section-add');
+
+    navUsers.addEventListener('click', () => {
+      navUsers.classList.add('active');
+      navOrders.classList.remove('active');
+      navAdd.classList.remove('active');
+
+      sectionUsers.classList.add('active');
+      sectionOrders.classList.remove('active');
+      sectionAdd.classList.remove('active');
+    });
+
+    navOrders.addEventListener('click', () => {
+      navOrders.classList.add('active');
+      navUsers.classList.remove('active');
+      navAdd.classList.remove('active');
+
+      sectionOrders.classList.add('active');
+      sectionUsers.classList.remove('active');
+      sectionAdd.classList.remove('active');
+    });
+
+    navAdd.addEventListener('click', () => {
+      navAdd.classList.add('active');
+      navUsers.classList.remove('active');
+      navOrders.classList.remove('active');
+
+      sectionAdd.classList.add('active');
+      sectionUsers.classList.remove('active');
+      sectionOrders.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
