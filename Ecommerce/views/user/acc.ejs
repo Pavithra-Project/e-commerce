@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accessories Collection</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #fff8f9;
+      color: #4a4a4a;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #f9e6eb;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      color: #c2185b;
+      font-size: 28px;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+    }
+
+    .nav-buttons button {
+      background-color: white;
+      color: #c2185b;
+      border: 1.5px solid #c2185b;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .nav-buttons button:hover {
+      background-color: #fcd8e4;
+    }
+
+    .header-image {
+      width: 100%;
+      height: 320px;
+      background-image: url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1470&q=80');
+      background-position: center;
+      background-size: cover;
+      filter: brightness(0.85);
+      margin-bottom: 30px;
+    }
+
+    .intro-text {
+      max-width: 900px;
+      margin: 0 auto 50px auto;
+      padding: 0 20px;
+      text-align: center;
+      color: #7a274a;
+    }
+
+    .intro-text h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .intro-text p {
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 500;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 0 40px 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(194, 24, 91, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 14px 28px rgba(194, 24, 91, 0.25);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+
+    .product-card h3 {
+      font-size: 22px;
+      color: #c2185b;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .product-card p {
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    .price {
+      font-weight: 700;
+      color: #a30b4a;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .product-card form,
+    .product-card button {
+      margin-top: 10px;
+    }
+
+    .product-card input[type="number"] {
+      width: 60px;
+      padding: 7px;
+      border-radius: 8px;
+      border: 1.5px solid #ccc;
+      margin-top: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      background-color: #c2185b;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #910d3f;
+    }
+
+    #buyNowModal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    #buyNowModal .modal-content {
+      background: white;
+      padding: 20px 25px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+      font-size: 14px;
+    }
+    #buyNowModal .close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #555;
+      font-weight: bold;
+    }
+    #buyNowModal img {
+      max-width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    #buyNowModal input, #buyNowModal textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 8px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+    #buyNowModal button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .modal-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #007bff;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Accessories Collection</h1>
+    <div class="nav-buttons">
+      <button onclick="location.href='/user/logout'">Logout</button>
+      <button onclick="location.href='/user/cart'">My Cart</button>
+      <button onclick="location.href='/user/order'">My Orders</button>
+    </div>
+  </header>
+
+  <div class="header-image"></div>
+
+  <section class="intro-text">
+    <h2>Discover Our Exclusive Accessories</h2>
+    <p>Elevate your style with our curated collection of timeless accessories — from chic sunglasses to elegant scarves and more. Perfect for every occasion, find your perfect match today!</p>
+  </section>
+
+  <div class="products">
+    <% accessories.forEach(function(item) { %>
+      <div class="product-card">
+        <img src="<%= item.image %>" alt="<%= item.name %>" />
+        <h3><%= item.name %></h3>
+        <p>Brand: <%= item.brand %></p>
+        <p class="price">₹<%= item.price %></p>
+
+        <form action="/add-to-cart/<%= item._id %>" method="POST">
+          <input type="number" name="quantity" min="1" value="1" required />
+          <button type="submit">Add to Cart</button>
+        </form>
+
+        <button onclick="openModal('<%= item._id %>', '<%= item.name %>', '<%= item.image %>', '<%= item.price %>')">Buy Now</button>
+      </div>
+    <% }) %>
+  </div>
+
+  <div id="buyNowModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-title">Complete Your Order</div>
+
+      <form action="/user/order" method="POST">
+        <input type="hidden" name="productId" id="modalProductId" />
+        <img id="modalProductImage" src="" alt="Product Image" />
+        <p><strong>Product:</strong> <span id="modalName"></span></p>
+        <p class="modal-price">Price: ₹<span id="modalPrice"></span></p>
+
+        <input type="text" name="customerName" placeholder="Your Name" required />
+        <input type="tel" name="contactNumber" placeholder="Contact Number" pattern="[0-9]{10}" required />
+        <textarea name="address" rows="3" placeholder="Shipping Address" required></textarea>
+        <input type="number" name="quantity" id="modalQuantity" min="1" value="1" required />
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id, name, img, price) {
+      document.getElementById('buyNowModal').style.display = 'flex';
+      document.getElementById('modalProductId').value = id;
+      document.getElementById('modalName').innerText = name;
+      document.getElementById('modalProductImage').src = img;
+      document.getElementById('modalPrice').innerText = price;
+      document.getElementById('modalQuantity').value = 1;
+    }
+    function closeModal() {
+      document.getElementById('buyNowModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('buyNowModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+</body>
+</html>

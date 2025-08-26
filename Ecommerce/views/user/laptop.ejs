@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Laptop Store</title>
+  <style>
+    /* Reset & basics */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background-color: #CCCCFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+    }
+    header h1 {
+      font-size: 28px;
+      color: #007bff;
+    }
+    .nav-buttons button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      border: 2px solid #007bff;
+      background: none;
+      color: #007bff;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .nav-buttons button:hover {
+      background-color: #007bff;
+      color: white;
+    }
+    .laptops {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .laptop-item {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .laptop-item img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+    .laptop-item h3 {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+    .laptop-item p {
+      margin: 5px 0;
+    }
+    .price {
+      font-weight: bold;
+      font-size: 18px;
+      color: #007bff;
+    }
+    .laptop-item form,
+    .laptop-item button {
+      margin-top: 10px;
+    }
+    .laptop-item input[type="number"] {
+      width: 60px;
+      padding: 6px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 8px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #buyNowModal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    #buyNowModal .modal-content {
+      background: white;
+      padding: 20px 25px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+      font-size: 14px;
+    }
+    #buyNowModal .close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #555;
+      font-weight: bold;
+    }
+    #buyNowModal img {
+      max-width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    #buyNowModal input, #buyNowModal textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 8px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+    #buyNowModal button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .modal-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #007bff;
+      text-align: center;
+    }
+
+   
+    #successPopup {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #28a745;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    @keyframes fadein {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes fadeout {
+      from {opacity: 1;}
+      to {opacity: 0;}
+    }
+  </style>
+</head>
+<body>
+
+ 
+  <header>
+    <h1>Laptop Store</h1>
+    <div class="nav-buttons">
+         <button onclick="location.href='/user/logout'">Logout</button>
+      <button onclick="location.href='/user/cart'">My Cart</button>
+      <button onclick="location.href='/user/order'">My Orders</button>
+    </div>
+  </header>
+
+
+  <div class="laptops">
+    <% laptops.forEach(function(laptop) { %>
+      <div class="laptop-item">
+        <img src="<%= laptop.image %>" alt="<%= laptop.name %>" />
+        <h3><%= laptop.name %></h3>
+        <p>Brand: <%= laptop.brand %></p>
+        <p class="price">₹<%= laptop.price %></p>
+
+       
+        <form action="/add-to-cart/<%= laptop._id %>" method="POST">
+          <input type="number" name="quantity" min="1" value="1" required />
+          <button type="submit">Add to Cart</button>
+        </form>
+
+       
+        <button
+          onclick="openModal('<%= laptop._id %>', '<%= laptop.name %>', '<%= laptop.image %>', '<%= laptop.price %>')"
+        >
+          Buy Now
+        </button>
+      </div>
+    <% }) %>
+  </div>
+
+  
+  <div id="buyNowModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-title">Complete Your Order</div>
+
+      <form action="/user/order" method="POST" id="orderForm">
+        <input type="hidden" name="productId" id="modalProductId" />
+
+        <img id="modalProductImage" src="" alt="Product Image" />
+        <p><strong>Product:</strong> <span id="modalName"></span></p>
+        <p><strong>Price:</strong> ₹<span id="modalPrice"></span></p>
+
+        <input type="text" name="customerName" placeholder="Your Name" required />
+        <input type="text" name="contact" placeholder="Contact Number" required />
+        <textarea name="address" placeholder="Delivery Address" rows="3" required></textarea>
+
+        <input
+          type="number"
+          name="quantity"
+          id="modalQuantity"
+          min="1"
+          value="1"
+          required
+          oninput="updateTotalPrice()"
+        />
+
+        <p><strong>Total:</strong> ₹<span id="modalTotalPrice">0</span></p>
+
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div id="successPopup">✅ Your order placed successfully!</div>
+
+  <script>
+    function openModal(id, name, image, price) {
+      document.getElementById('buyNowModal').style.display = 'flex';
+      document.getElementById('modalProductId').value = id;
+      document.getElementById('modalName').innerText = name;
+      document.getElementById('modalPrice').innerText = price;
+      document.getElementById('modalProductImage').src = image;
+      document.getElementById('modalQuantity').value = 1;
+      updateTotalPrice();
+    }
+
+    function closeModal() {
+      document.getElementById('buyNowModal').style.display = 'none';
+    }
+
+    function updateTotalPrice() {
+      const price = parseFloat(document.getElementById('modalPrice').innerText);
+      const quantity = parseInt(document.getElementById('modalQuantity').value);
+      if (!quantity || quantity < 1) {
+        document.getElementById('modalQuantity').value = 1;
+      }
+      const totalPrice = price * (quantity > 0 ? quantity : 1);
+      document.getElementById('modalTotalPrice').innerText = totalPrice.toFixed(2);
+    }
+
+
+  
+  const orderForm = document.getElementById('orderForm');
+
+  orderForm.addEventListener('submit', function (e) {
+    e.preventDefault();  
+
+    alert('Your order has been placed.');
+
+    
+    closeModal();
+  });
+
+
+  </script>
+</body>
+</html>

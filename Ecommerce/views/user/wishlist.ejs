@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Wishlist</title>
+</head>
+<body>
+  <h1>Your Wishlist</h1>
+
+  <a href="/mobiles">← Back to Mobiles</a> | 
+  <a href="/cart">🛒 Cart</a> | 
+  <a href="/orders">📦 Orders</a> | 
+  <a href="/logout">Logout</a>
+
+  <% if (wishlistItems.length === 0) { %>
+    <p>Your wishlist is empty.</p>
+  <% } else { %>
+    <% wishlistItems.forEach(item => { %>
+      <div style="border: 1px solid #ccc; padding: 10px; margin: 10px;">
+        <img src="<%= item.image %>" width="100">
+        <h3><%= item.name %></h3>
+        <p>Price: ₹<%= item.price %></p>
+
+        <form action="/add-to-cart" method="POST">
+          <input type="hidden" name="productId" value="<%= item._id %>">
+          <button type="submit">Move to Cart</button>
+        </form>
+      </div>
+    <% }) %>
+  <% } %>
+</body>
+</html>

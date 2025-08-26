@@ -1,0 +1,257 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Earbuds Store</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #FFCCCC;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #e60073;
+    }
+
+    .nav-buttons button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      border: 2px solid #e60073;
+      background: none;
+      color: #e60073;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-item {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .product-item img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .product-item h3 {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+
+    .product-item p {
+      margin: 5px 0;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 18px;
+      color: #e60073;
+    }
+
+    .product-item form,
+    .product-item button {
+      margin-top: 10px;
+    }
+
+    .product-item input[type="number"] {
+      width: 60px;
+      padding: 6px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 8px;
+    }
+
+    button {
+      background-color: #e60073;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #cc0052;
+    }
+
+    #buyNowModal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    #buyNowModal .modal-content {
+      background: white;
+      padding: 20px 25px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+      font-size: 14px;
+    }
+    #buyNowModal .close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #555;
+      font-weight: bold;
+    }
+    #buyNowModal img {
+      max-width: 100%;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    #buyNowModal input, #buyNowModal textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 8px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+    #buyNowModal button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .modal-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #007bff;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Earbuds Store</h1>
+    <div class="nav-buttons">
+         <button onclick="location.href='/user/logout'">Logout</button>
+      <button onclick="location.href='/user/cart'">My Cart</button>
+      <button onclick="location.href='/user/order'">My Orders</button>
+    </div>
+  </header>
+
+  <!-- Earbuds Grid -->
+  <div class="products">
+    <% earbuds.forEach(function(product) { %>
+      <div class="product-item">
+        <img src="<%= product.image %>" alt="<%= product.name %>">
+        <h3><%= product.name %></h3>
+        <p><%= product.description %></p>
+        <p class="price">₹<%= product.price %></p>
+
+        <!-- Add to Cart -->
+        <form action="/add-to-cart/<%= product._id %>" method="POST">
+          <input type="number" name="quantity" min="1" value="1" required>
+          <button type="submit">Add to Cart</button>
+        </form>
+
+        <!-- Buy Now -->
+        <button onclick="openModal('<%= product._id %>', '<%= product.name %>', '<%= product.image %>', '<%= product.price %>')">Buy Now</button>
+      </div>
+    <% }) %>
+  </div>
+
+  <!-- Buy Now Modal -->
+  <div id="buyNowModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-title">Complete Your Order</div>
+
+      <form id="orderForm" action="/user/order" method="POST">
+        <input type="hidden" name="productId" id="modalProductId">
+
+        <img id="modalProductImage" src="" alt="Product Image">
+
+        <p><strong>Product:</strong> <span id="modalName"></span></p>
+        <p><strong>Price:</strong> ₹<span id="modalPrice"></span></p>
+
+        <input type="text" name="customerName" placeholder="Your Name" required>
+        <input type="text" name="contact" placeholder="Contact Number" required>
+        <textarea name="address" placeholder="Delivery Address" required></textarea>
+        
+        <input type="number" name="quantity" min="1" value="1" required oninput="updateTotalPrice()">
+
+        <p>Total: ₹<span id="modalTotalPrice">0</span></p>
+
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function openModal(id, name, image, price) {
+      document.getElementById("buyNowModal").style.display = "flex";
+      document.getElementById("modalProductId").value = id;
+      document.getElementById("modalName").innerText = name;
+      document.getElementById("modalPrice").innerText = price;
+      document.getElementById("modalProductImage").src = image;
+      updateTotalPrice();
+    }
+
+    function closeModal() {
+      document.getElementById("buyNowModal").style.display = "none";
+    }
+
+    function updateTotalPrice() {
+      const price = parseFloat(document.getElementById("modalPrice").innerText);
+      const quantity = document.querySelector('#buyNowModal input[name="quantity"]').value;
+      const totalPrice = price * quantity;
+      document.getElementById("modalTotalPrice").innerText = totalPrice.toFixed(2);
+    }
+
+    // Show alert on order placement
+    document.addEventListener("DOMContentLoaded", function () {
+      const orderForm = document.getElementById("orderForm");
+      orderForm.addEventListener("submit", function (e) {
+        alert("Your order has been placed!");
+      });
+    });
+  </script>
+
+</body>
+</html>

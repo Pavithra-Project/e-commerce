@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carto - Dashboard</title>
+  <link rel="stylesheet" href="/css/main.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    /* Header with Navbar */
+    /* header {
+      background: linear-gradient(135deg, #fc5c7d, #6a82fb);
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    } */
+    header {
+  background-image: url('https://img.freepik.com/premium-vector/aesthetic-cute-blue-background-illustration-perfect-wallpaper-backdrop-postcard-background_565280-749.jpg'); /* Your own background image URL */
+  background-size: cover;
+  background-position: center;
+  padding: 40px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+    header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+      padding: 12px 25px;
+      border-radius: 30px;
+      background-color: rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .navbar a:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    /* Search Bar */
+    .search-bar {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar input[type="text"] {
+      width: 75%;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.7);
+      color: #333;
+      font-size: 16px;
+      outline: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-bar button {
+      margin-left: -45px;
+      border: none;
+      background: transparent;
+      color: #333;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+  
+    .summer-offer {
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    .summer-offer img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+   
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 80px;
+      padding: 50px;
+      justify-items: center;
+    }
+
+    .category-card {
+      background-color: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+ 
+.navbar button {
+  background-color: #2398d2;   
+  color: white;                
+  border: none;
+  padding: 12px 28px;
+  margin: 0 5px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgb(35 152 210 / 0.4);
+}
+
+.navbar button:hover {
+  background-color: #1a6fa3;   
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgb(26 111 163 / 0.6);
+}
+
+.navbar button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #7dc1ff;
+}
+
+
+    button.a {
+  display: block;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  background-color: #fff;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.a:hover {
+  background-color: #f5f5f5;
+}
+
+
+    footer {
+      background-color: #2398d2;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>Carto</h2>
+    
+    <div class="navbar">
+      <button onclick="window.location.href='/user/main'">Dashboard</button>
+<button onclick="window.location.href='/user/order'">Order</button>
+ 
+
+<button onclick="window.location.href='/user/cart'">Cart</button>
+<button onclick="window.location.href='/user/logout'">LogOut</button>
+
+
+    </div>
+
+   
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search for products..." oninput="filterCategories()" />
+  <button type="button"><i class="fas fa-search"></i></button>
+</div>
+
+
+  </header>
+
+ 
+  <div class="summer-offer">
+    <img src="https://www.shutterstock.com/image-vector/summer-sale-three-blue-podium-600nw-2471730467.jpg" alt="Summer Offer">
+  </div>
+
+  
+  <section class="category-grid" id="categoryGrid">
+
+    <div class="category-card">
+      <img src="https://images.samsung.com/is/image/samsung/assets/in/explore/brand/5-best-android-mobile-phones-2022-in-india/banner-mobile-720x761-080422.jpg?$720_N_JPG$" alt="Mobiles">
+      
+       <button class="a" onclick="window.location.href='/mobile'">Mobiles</button>
+       
+       
+    </div>
+    <div class="category-card">
+      <img src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=400&q=60" alt="Laptops">
+      <button class="a" onclick="window.location.href='/laptop'">Laptop</button>
+    </div>
+    <div class="category-card">
+      <img src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/280_lr.png?v=1721292483" alt="AirPods">
+      <button class="a" onclick="window.location.href='/earbuds'">Ear Buds</button>
+    </div>
+    <div class="category-card">
+      <img src="https://thekina.in/cdn/shop/articles/luxury_clothing_for_men.jpg?v=1715407408" alt="Clothes">
+      <button class="a" onclick="window.location.href='/clothes'">Clothes(Men)</button>
+    </div>
+    <div class="category-card">
+      <img src="https://i.pinimg.com/736x/ae/11/ec/ae11ec71f20e18c0fe282ebc07033820.jpg" alt="Dresses">
+      <button class="a" onclick="window.location.href='/dresses'">Dresses(Women)</button>
+    </div>
+    <div class="category-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7DMu-7O2189abNd7fPJCirKtnE_NiO93s_g&s" alt="Dresses">
+      <button class="a" onclick="window.location.href='/hp'">HeadPhones</button>
+    </div>
+    <div class="category-card">
+      <img src="https://static.fibre2fashion.com//articleresources/images/71/7074/SAdobeStock_247321133_Small.jpg" alt="Dresses">
+      <button class="a" onclick="window.location.href='/acc'">Accesories</button>
+    </div>
+    <div class="category-card">
+      <img src="https://www.carlington.in/cdn/shop/files/Carlington_elite_analog_ladies_watch_CT_2014_rosegold.jpg?v=1696691332" alt="Dresses">
+      <button class="a" onclick="window.location.href='/watch'">Watches</button>
+    </div>
+  
+  </section>
+
+<div style="text-align: center; margin-top: 50px;">
+  <h2 style="font-size: 2rem; font-weight: bold; color: #1d3557;">🔥 Exclusive Watch Deals Just For You!</h2>
+  <p style="font-size: 1.1rem; color: #333;">Grab stylish watches at unbeatable prices. Limited-time offer!</p>
+</div>
+
+<div class="summer-offer">
+  <img src="https://sylvi.in/cdn/shop/collections/Watches-1920x550_copy.jpg?v=1736331784" alt="watch">
+</div>
+<div style="text-align: center; margin-top: 20px;">
+  <button onclick="window.location.href='/watch'" style="
+    display: inline-block;
+    background-color: #2398d2;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  " onmouseover="this.style.backgroundColor='#1a6fa3'; this.style.transform='scale(1.05)';" 
+     onmouseout="this.style.backgroundColor='#2398d2'; this.style.transform='scale(1)';">
+    View Watches
+  </button>
+</div>
+
+
+  <footer>
+    &copy; 2025 Carto. All rights reserved.
+  </footer>
+  <script>
+  
+    function filterCategories() {
+      const searchInput = document.getElementById('searchInput').value.toLowerCase();
+      const categoryGrid = document.getElementById('categoryGrid');
+      const categories = categoryGrid.getElementsByClassName('category-card');
+      
+      
+      for (let i = 0; i < categories.length; i++) {
+        const category = categories[i];
+        const categoryName = category.querySelector('button').innerText.toLowerCase();
+        if (categoryName.includes(searchInput)) {
+          category.style.display = 'block'; 
+        } else {
+          category.style.display = 'none'; 
+        }
+      }
+    }
+  </script>
+      
+
+
+</body>
+</html>

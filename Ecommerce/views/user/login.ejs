@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/login.css" />
+</head>
+<body>
+  <h2>Login</h2>
+  <video autoplay muted loop class="bg-video">
+    <source src="https://videos.pexels.com/video-files/5658299/5658299-uhd_2732_1440_25fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <form action="/login" method="POST">
+  <label>Username:</label>
+  <input type="text" name="username" required />
+  
+  <label>Password:</label>
+  <input type="password" name="password" required />
+  
+  <button type="submit">Login</button>
+  
+  <p class="register-link">
+    New to this? <a href="/register">Register</a>
+  </p>
+</form>
+
+</body>
+</html>
