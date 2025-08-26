@@ -1,0 +1,158 @@
+/* Header styles */
+.site-header {
+  position: absolute;
+  margin-right: 800px;
+  top: 20px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 500;
+  background: transparent;
+  color: #ff7e5f;
+  border: 2px solid #ff7e5f;
+  transition: all 0.3s ease;
+}
+
+.auth-button.signup {
+  background: #ff7e5f;
+  color: white;
+}
+
+.auth-button:hover {
+  background: #ff7e5f;
+  color: white;
+}
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+.left-content {
+  width: 50%;
+  padding: 100px 60px;
+  z-index: 2;
+}
+
+.company-name {
+  font-family: 'Style Script', cursive;
+  font-size: 40px;
+  color: #333;
+}
+
+.tagline {
+  font-size: 26px;
+  margin: 20px 0;
+  color: #090909;
+}
+
+.shopnow-button {
+  padding: 15px 40px;
+  font-size: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.shopnow-button:hover {
+  transform: scale(1.05);
+}
+
+/* Right Image in Hero */
+.hero-image {
+  width: 50%;
+  background: url('https://i.pinimg.com/474x/51/6b/12/516b12956b9759b52ec58e8c542c47b4.jpg') center center / cover no-repeat;
+}
+
+/* About Section */
+#about {
+  padding: 80px 60px;
+  text-align: center;
+  background-color: white;
+}
+
+.vision {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #555;
+}
+
+/* Contact Section */
+.contact {
+  padding: 80px 60px;
+  text-align: center;
+  background-color: white;
+}
+
+.contact form {
+  max-width: 500px;
+  margin: 0 auto;
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.contact input,
+.contact textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact textarea {
+  resize: vertical;
+}
+
+.contact-submit {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contact-submit:hover {
+  background: linear-gradient(135deg, #feb47b, #ff7e5f);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 40px;
+  background: #f1f1f1;
+  font-size: 14px;
+  color: #777;
+}

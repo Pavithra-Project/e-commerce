@@ -1,0 +1,134 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body & Background Image */
+body, html {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-image: url("https://t3.ftcdn.net/jpg/05/35/13/82/360_F_535138292_62ZnI4Hcw37J8Jaeg4E9TzJwUciCwSnp.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header Styling */
+header {
+  text-align: center;
+  margin-top: 20px;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  user-select: none;
+}
+
+/* Form Styling - Centered Transparent Box with Blur */
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent */
+  backdrop-filter: blur(10px);
+  padding: 50px 60px;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Label Styling */
+label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Input Styling */
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #21867a;
+  box-shadow: 0 0 5px #21867a;
+  background-color: #fff;
+}
+
+/* Button Styling */
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #e3aac2;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #21867a;
+  transform: scale(1.05);
+}
+
+/* Footer Styling */
+footer {
+  text-align: center;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  color: #fff;
+  font-size: 14px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  user-select: none;
+}
+
+/* Image Section Styling */
+.image-container img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+/* Account link paragraph */
+.account-link {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Link inside account link */
+.account-link a {
+  color: #21867a;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.account-link a:hover {
+  color: #e3aac2;
+  text-decoration: underline;
+  cursor: pointer;
+}
